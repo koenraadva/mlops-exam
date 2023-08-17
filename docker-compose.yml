@@ -1,0 +1,16 @@
+services:
+  api:
+    image: koenraadva/mlops-exam-backend
+    build:
+      context: api
+      dockerfile: dockerfile
+    environment:
+      file_format: json
+  frontend:
+    image: koenraad/mlops-exam-frontend
+    build:
+      context: frontend
+      dockerfile: frontend-dockerfile
+    environment:
+      API_HOST: api
+      API_PORT: 8080
