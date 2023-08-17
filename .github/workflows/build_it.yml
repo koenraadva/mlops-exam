@@ -25,13 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Change to api directory
+      - name: Build Dockerfile
         run: |
           cd ./api
           pwd
-
-      - name: Build Dockerfile
-        run: docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} .
+          docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} .
 
       # Enter your GITHUB Token here!
       - name: Login to GHCR
