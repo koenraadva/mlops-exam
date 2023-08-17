@@ -28,7 +28,7 @@ jobs:
       - name: Build Dockerfile
         working-directory: ./api
         run: |
-          docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} -f api/Dockerfile . 
+          docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} . 
 
       # Enter your GITHUB Token here!
       - name: Login to GHCR
