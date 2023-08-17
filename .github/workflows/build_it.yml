@@ -25,10 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Build Dockerfile
-        working-directory: ./api
-        run: |
-          docker build -t ghcr.io/koenraadva/mlops-exam-backend:${{ github.sha }} . 
+      #- name: Build Dockerfile
+      #  working-directory: ./api
+      #  run: |
+      #    docker build -t ghcr.io/koenraadva/mlops-exam-backend:${{ github.sha }} . 
 
       # Enter your GITHUB Token here!
       - name: Login to GHCR
