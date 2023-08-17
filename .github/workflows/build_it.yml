@@ -57,3 +57,45 @@ jobs:
           context: api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
+  docker-build-and-push-frontend:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job 
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Gather Docker Meta Information
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ghcr.io/koenraadva/mlops-exam-frontend
+          # generate Docker tags based on the following events/attributes:
+          # The GitHub Branch
+          # The GitHub SHA
+          # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=sha
+          flavor: |
+            latest=true
+      # Enter your GITHUB Token here!
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Docker Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: frontend
+          file: frontend-dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
