@@ -56,4 +56,4 @@ jobs:
         with:
           context: api
           push: true
-          tags: ${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
