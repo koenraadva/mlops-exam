@@ -1,0 +1,32 @@
+name: Docker build WorkFlow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  GIT_SHA: ${{ github.sha }} # Set the SHA to use in the code
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a job for backend and frontend
+  docker-build-and-push-backend:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Change to api directory
+        run: cd ./api
+
+      - name: Build Dockerfile
+        run: docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} .
