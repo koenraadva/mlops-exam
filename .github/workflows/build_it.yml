@@ -31,7 +31,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/koenraadva/mlops-exam
+            ghcr.io/koenraadva/mlops-exam-backend
           # generate Docker tags based on the following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
