@@ -20,16 +20,14 @@ jobs:
   docker-build-and-push-backend:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # Steps represent a sequence of tasks that will be executed as part of the job 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: Build Dockerfile
         run: |
-          cd ./api
-          pwd
-          docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} .
+          docker build -t koenraadva/mlops-exam-backend:${{ github.sha }} -f api/Dockerfile . 
 
       # Enter your GITHUB Token here!
       - name: Login to GHCR
